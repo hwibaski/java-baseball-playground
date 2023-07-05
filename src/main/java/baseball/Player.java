@@ -2,23 +2,24 @@ package baseball;
 
 import static baseball.BallSet.TOTAL_BALL_COUNT;
 
-public class Computer {
+public class Player {
     private final BallSet ballSet;
 
-    public Computer() {
+    public Player() {
         this.ballSet = new BallSet(this.generateThreeBall());
     }
 
     private Ball[] generateThreeBall() {
         Ball[] tmpBalls = new Ball[TOTAL_BALL_COUNT];
-        this.assignBallSet(tmpBalls);
+        String playerInputNum = InputReceiver.getPlayerInputNum();
+        String s = String.valueOf(playerInputNum);
+        assignBallSet(tmpBalls, s);
         return tmpBalls;
     }
 
-    private void assignBallSet(Ball[] tmpBalls) {
+    private void assignBallSet(Ball[] tmpBalls, String s) {
         for (int i = 0; i < TOTAL_BALL_COUNT; i++) {
-            int randomNumber = RandomNumberGenerator.createRandomNumberBetweenOneAndNine();
-            tmpBalls[i] = new Ball(randomNumber);
+            tmpBalls[i] = new Ball(Character.getNumericValue(s.charAt(i)));
         }
     }
 

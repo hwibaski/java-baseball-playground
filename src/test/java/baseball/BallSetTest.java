@@ -11,7 +11,8 @@ class BallSetTest {
     @Test
     void ball_set_has_three_ball() {
         // given
-        BallSet ballSet = new BallSet();
+        Ball[] balls = {new Ball(1), new Ball(2), new Ball(3)};
+        BallSet ballSet = new BallSet(balls);
 
         // when
         int ballsLength = ballSet.getBallsLength();
@@ -19,4 +20,5 @@ class BallSetTest {
         // then
         assertThat(ballsLength).isEqualTo(3);
     }
+
 }
