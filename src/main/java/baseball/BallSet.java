@@ -8,9 +8,14 @@ public class BallSet {
         this.balls = balls;
     }
 
+    public Ball[] getBalls() {
+        return balls;
+    }
+
     /**
      * 테스트 위한 메서드
      */
+
     public int getBallsLength() {
         return this.balls.length;
     }
