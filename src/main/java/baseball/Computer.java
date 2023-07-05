@@ -2,6 +2,9 @@ package baseball;
 
 import static baseball.BallSet.TOTAL_BALL_COUNT;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Computer {
     private final BallSet ballSet;
 
@@ -16,11 +19,23 @@ public class Computer {
     }
 
     private void assignBallSet(Ball[] tmpBalls) {
-        for (int i = 0; i < TOTAL_BALL_COUNT; i++) {
+        List<Integer> prevNums = new ArrayList<>();
+        int madeBallCount = 0;
+        while (madeBallCount < TOTAL_BALL_COUNT) {
             int randomNumber = RandomNumberGenerator.createRandomNumberBetweenOneAndNine();
-            int order = i + 1;
-            tmpBalls[i] = new Ball(randomNumber, order);
+            int order = madeBallCount + 1;
+            Ball ball = new Ball(randomNumber, order);
+            madeBallCount = getMadeBallCount(tmpBalls, prevNums, madeBallCount, ball);
         }
+    }
+
+    private int getMadeBallCount(Ball[] tmpBalls, List<Integer> prevNums, int madeBallCount, Ball ball) {
+        if (!prevNums.contains(ball.getNum())) {
+            tmpBalls[madeBallCount] = ball;
+            madeBallCount++;
+            prevNums.add(ball.getNum());
+        }
+        return madeBallCount;
     }
 
     /**
