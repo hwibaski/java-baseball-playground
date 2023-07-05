@@ -19,7 +19,8 @@ public class Player {
 
     private void assignBallSet(Ball[] tmpBalls, String s) {
         for (int i = 0; i < TOTAL_BALL_COUNT; i++) {
-            tmpBalls[i] = new Ball(Character.getNumericValue(s.charAt(i)));
+            int order = i + 1;
+            tmpBalls[i] = new Ball(Character.getNumericValue(s.charAt(i)), order);
         }
     }
 

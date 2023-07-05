@@ -11,10 +11,11 @@ class BallTest {
     void ball_class_constructor_max_num_constraint_test() {
         // given
         int ballNum = 100;
+        int ballOrder = 1;
 
         // when
         // then
-        assertThatThrownBy(() -> new Ball(ballNum))
+        assertThatThrownBy(() -> new Ball(ballNum, ballOrder))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("볼은 1에서 9사이의 값만 가질 수 있습니다");
     }
@@ -24,10 +25,11 @@ class BallTest {
     void ball_class_constructor_min_num_constarint_test() {
         // given
         int ballNum = 0;
+        int ballOrder = 1;
 
         // when
         // then
-        assertThatThrownBy(() -> new Ball(ballNum))
+        assertThatThrownBy(() -> new Ball(ballNum, ballOrder))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("볼은 1에서 9사이의 값만 가질 수 있습니다");
     }

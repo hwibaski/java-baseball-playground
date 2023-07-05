@@ -11,7 +11,7 @@ class BallSetTest {
     @Test
     void ball_set_has_three_ball() {
         // given
-        Ball[] balls = {new Ball(1), new Ball(2), new Ball(3)};
+        Ball[] balls = {new Ball(1, 1), new Ball(2, 2), new Ball(3, 3)};
         BallSet ballSet = new BallSet(balls);
 
         // when

@@ -18,7 +18,8 @@ public class Computer {
     private void assignBallSet(Ball[] tmpBalls) {
         for (int i = 0; i < TOTAL_BALL_COUNT; i++) {
             int randomNumber = RandomNumberGenerator.createRandomNumberBetweenOneAndNine();
-            tmpBalls[i] = new Ball(randomNumber);
+            int order = i + 1;
+            tmpBalls[i] = new Ball(randomNumber, order);
         }
     }
 

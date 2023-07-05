@@ -1,15 +1,21 @@
 package baseball;
 
 public class Ball {
+    private int order;
     private int num;
 
-    public Ball(int num) {
+    public Ball(int num, int order) {
         validateBallNumThatBetweenOneAndNine(num);
         this.num = num;
+        this.order = order;
     }
 
     public int getNum() {
         return num;
+    }
+
+    public int getOrder() {
+        return order;
     }
 
     private void validateBallNumThatBetweenOneAndNine(int num) {
