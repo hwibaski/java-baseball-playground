@@ -1,9 +1,14 @@
 package baseball;
 
 public class GameResult {
+    public static final int STRIKE_OUT_COUNT = 3;
     private final int strikeCount;
     private final int ballCount;
     private final boolean isNothing;
+
+    public boolean isGameOver() {
+        return this.strikeCount == STRIKE_OUT_COUNT;
+    }
 
     public GameResult(int strikeCount, int ballCount, boolean isNothing) {
         this.strikeCount = strikeCount;
