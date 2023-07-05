@@ -15,7 +15,6 @@ public class BallSet {
     /**
      * 테스트 위한 메서드
      */
-
     public int getBallsLength() {
         return this.balls.length;
     }

@@ -8,16 +8,28 @@ public class Referee {
     private int strikeCount;
     private int ballCount;
 
-    public void judge(BallSet prevBallSet, BallSet nextBallSet) {
-        judgeStrike(prevBallSet, nextBallSet);
+    private boolean isNothing;
+
+    private final BallSet prevBallSet;
+    private final BallSet nextBallSet;
+
+    public Referee(BallSet prevBallSet, BallSet nextBallSet) {
+        this.prevBallSet = prevBallSet;
+        this.nextBallSet = nextBallSet;
     }
 
-    public int judgeStrike(BallSet prevBallSet, BallSet nextBallSet) {
+    public GameResult judge() {
+        this.judgeStrike();
+        this.judgeBall();
+        this.judgeNothing();
+
+        return new GameResult(this.strikeCount, this.ballCount, this.isNothing);
+    }
+
+    private void judgeStrike() {
         for (int i = 0; i < TOTAL_BALL_COUNT; i++) {
             this.increaseStrikeCount(prevBallSet.getBalls()[i].getNum(), nextBallSet.getBalls()[i].getNum());
         }
-
-        return this.strikeCount;
     }
 
     private void increaseStrikeCount(int prevBallNum, int nextBallNum) {
@@ -26,19 +38,31 @@ public class Referee {
         }
     }
 
-    public int judgeBall(BallSet prevBallSet, BallSet nextBallSet) {
+    private void judgeBall() {
         for (int i = 0; i < TOTAL_BALL_COUNT; i++) {
             long ballCountWithEachBall = this.calculateBallCountInNextBallSetWithPrevBall(prevBallSet.getBalls()[i],
                 nextBallSet);
             this.ballCount += ballCountWithEachBall;
         }
-
-        return this.ballCount;
     }
 
     private int calculateBallCountInNextBallSetWithPrevBall(Ball prevBall, BallSet nextBallSet) {
         return (int)Arrays.stream(nextBallSet.getBalls())
             .filter((ball) -> ball.getOrder() != prevBall.getOrder())
             .filter(ball -> ball.getNum() == prevBall.getNum()).count();
+    }
+
+    private void judgeNothing() {
+        if (isZeroStrikeCount() && isZeroBallCount()) {
+            this.isNothing = true;
+        }
+    }
+
+    private boolean isZeroStrikeCount() {
+        return this.strikeCount == 0;
+    }
+
+    private boolean isZeroBallCount() {
+        return this.ballCount == 0;
     }
 }

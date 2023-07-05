@@ -19,11 +19,11 @@ class RefereeTest {
         int expectStrikeCount = 3;
 
         // when
-        Referee referee = new Referee();
-        int strikeCount = referee.judgeStrike(ballSet1, ballSet2);
+        Referee referee = new Referee(ballSet1, ballSet2);
+        GameResult result = referee.judge();
 
         // then
-        assertThat(strikeCount).isEqualTo(expectStrikeCount);
+        assertThat(result.getStrikeCount()).isEqualTo(expectStrikeCount);
     }
 
     @DisplayName("strike 판변 테스트 - 2스트라이크인 경우")
@@ -39,11 +39,11 @@ class RefereeTest {
         int expectStrikeCount = 2;
 
         // when
-        Referee referee = new Referee();
-        int strikeCount = referee.judgeStrike(ballSet1, ballSet2);
+        Referee referee = new Referee(ballSet1, ballSet2);
+        GameResult result = referee.judge();
 
         // then
-        assertThat(strikeCount).isEqualTo(expectStrikeCount);
+        assertThat(result.getStrikeCount()).isEqualTo(expectStrikeCount);
     }
 
     @DisplayName("strike 판변 테스트 - 1스트라이크인 경우")
@@ -59,11 +59,11 @@ class RefereeTest {
         int expectStrikeCount = 1;
 
         // when
-        Referee referee = new Referee();
-        int strikeCount = referee.judgeStrike(ballSet1, ballSet2);
+        Referee referee = new Referee(ballSet1, ballSet2);
+        GameResult result = referee.judge();
 
         // then
-        assertThat(strikeCount).isEqualTo(expectStrikeCount);
+        assertThat(result.getStrikeCount()).isEqualTo(expectStrikeCount);
     }
 
     @DisplayName("strike 판변 테스트 - 0스트라이크인 경우")
@@ -79,11 +79,11 @@ class RefereeTest {
         int expectStrikeCount = 0;
 
         // when
-        Referee referee = new Referee();
-        int strikeCount = referee.judgeStrike(ballSet1, ballSet2);
+        Referee referee = new Referee(ballSet1, ballSet2);
+        GameResult result = referee.judge();
 
         // then
-        assertThat(strikeCount).isEqualTo(expectStrikeCount);
+        assertThat(result.getStrikeCount()).isEqualTo(expectStrikeCount);
     }
 
     @DisplayName("ball 판변 테스트 - 0 볼인 경우")
@@ -99,11 +99,12 @@ class RefereeTest {
         int expectBallCount = 0;
 
         // when
-        Referee referee = new Referee();
-        int ballCount = referee.judgeBall(ballSet1, ballSet2);
+        // when
+        Referee referee = new Referee(ballSet1, ballSet2);
+        GameResult result = referee.judge();
 
         // then
-        assertThat(ballCount).isEqualTo(expectBallCount);
+        assertThat(result.getBallCount()).isEqualTo(expectBallCount);
     }
 
     @DisplayName("ball 판변 테스트 - 1 볼인 경우")
@@ -119,11 +120,11 @@ class RefereeTest {
         int expectBallCount = 1;
 
         // when
-        Referee referee = new Referee();
-        int ballCount = referee.judgeBall(ballSet1, ballSet2);
+        Referee referee = new Referee(ballSet1, ballSet2);
+        GameResult result = referee.judge();
 
         // then
-        assertThat(ballCount).isEqualTo(expectBallCount);
+        assertThat(result.getBallCount()).isEqualTo(expectBallCount);
     }
 
     @DisplayName("ball 판변 테스트 - 2 볼인 경우")
@@ -139,11 +140,11 @@ class RefereeTest {
         int expectBallCount = 2;
 
         // when
-        Referee referee = new Referee();
-        int ballCount = referee.judgeBall(ballSet1, ballSet2);
+        Referee referee = new Referee(ballSet1, ballSet2);
+        GameResult result = referee.judge();
 
         // then
-        assertThat(ballCount).isEqualTo(expectBallCount);
+        assertThat(result.getBallCount()).isEqualTo(expectBallCount);
     }
 
     @DisplayName("ball 판변 테스트 - 3 볼인 경우")
@@ -159,10 +160,50 @@ class RefereeTest {
         int expectBallCount = 3;
 
         // when
-        Referee referee = new Referee();
-        int ballCount = referee.judgeBall(ballSet1, ballSet2);
+        Referee referee = new Referee(ballSet1, ballSet2);
+        GameResult result = referee.judge();
 
         // then
-        assertThat(ballCount).isEqualTo(expectBallCount);
+        assertThat(result.getBallCount()).isEqualTo(expectBallCount);
+    }
+
+    @DisplayName("nothing 판별 테스트 - nothing인 경우")
+    @Test
+    void nothing_test() {
+        // given
+        Ball[] balls1 = {new Ball(5, 1), new Ball(6, 2), new Ball(1, 3)};
+        BallSet ballSet1 = new BallSet(balls1);
+
+        Ball[] balls2 = {new Ball(2, 1), new Ball(7, 2), new Ball(9, 3)};
+        BallSet ballSet2 = new BallSet(balls2);
+
+        boolean expectNothing = true;
+
+        // when
+        Referee referee = new Referee(ballSet1, ballSet2);
+        GameResult result = referee.judge();
+
+        // then
+        assertThat(result.isNothing()).isEqualTo(expectNothing);
+    }
+
+    @DisplayName("nothing 판별 테스트 - nothing인 아닌 경우")
+    @Test
+    void not_nothing_test() {
+        // given
+        Ball[] balls1 = {new Ball(2, 1), new Ball(6, 2), new Ball(2, 3)};
+        BallSet ballSet1 = new BallSet(balls1);
+
+        Ball[] balls2 = {new Ball(2, 1), new Ball(5, 2), new Ball(6, 3)};
+        BallSet ballSet2 = new BallSet(balls2);
+
+        boolean expectNothing = false;
+
+        // when
+        Referee referee = new Referee(ballSet1, ballSet2);
+        GameResult result = referee.judge();
+
+        // then
+        assertThat(result.isNothing()).isEqualTo(expectNothing);
     }
 }

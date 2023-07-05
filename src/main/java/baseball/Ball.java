@@ -1,8 +1,8 @@
 package baseball;
 
 public class Ball {
-    private int order;
-    private int num;
+    private final int order;
+    private final int num;
 
     public Ball(int num, int order) {
         validateBallNumThatBetweenOneAndNine(num);
