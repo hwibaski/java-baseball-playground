@@ -19,7 +19,8 @@ class InputReceiverTest {
         this.setSystemIn(input);
 
         // when
-        List<Integer> playerInput = InputReceiver.getPlayerInputNum();
+        InputReceiver inputReceiver = new InputReceiver();
+        List<Integer> playerInput = inputReceiver.generateThreeNumbers();
 
         // then
         assertThat(playerInput).containsExactly(1, 2, 3);
@@ -35,7 +36,8 @@ class InputReceiverTest {
         // when
         // then
         assertThatThrownBy(() -> {
-            List<Integer> playerInput = InputReceiver.getPlayerInputNum();
+            InputReceiver inputReceiver = new InputReceiver();
+            List<Integer> playerInput = inputReceiver.generateThreeNumbers();
         })
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("숫자만 입력해주세요");
@@ -51,7 +53,8 @@ class InputReceiverTest {
         // when
         // then
         assertThatThrownBy(() -> {
-            List<Integer> playerInput = InputReceiver.getPlayerInputNum();
+            InputReceiver inputReceiver = new InputReceiver();
+            List<Integer> playerInput = inputReceiver.generateThreeNumbers();
         })
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("세 자리 숫자만 입력해주세요");

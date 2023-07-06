@@ -13,7 +13,7 @@ public class Game {
             System.out.println("세자리 숫자를 입력해주세요");
 
             Player player = this.settingPlayer();
-            Referee referee = settingReferee(player);
+            Referee referee = this.settingReferee(player);
             this.gameResult = referee.judge();
         }
 
@@ -29,6 +29,6 @@ public class Game {
     }
 
     private Player settingPlayer() {
-        return new Player();
+        return new Player(new InputReceiver());
     }
 }

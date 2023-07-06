@@ -11,7 +11,7 @@ class ComputerTest {
     void computer_has_ball_set_when_init() {
         // given
         // when
-        Computer computer = new Computer();
+        Computer computer = new Computer(new RandomNumberGenerator());
 
         // then
         assertThat(computer.getBallSet()).isNotNull();

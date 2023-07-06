@@ -16,7 +16,8 @@ class PlayerTest {
         // when
         String input = "123";
         this.setSystemIn(input);
-        Player player = new Player();
+
+        Player player = new Player(new InputReceiver());
 
         // then
         assertThat(player.getBallSet()).isNotNull();

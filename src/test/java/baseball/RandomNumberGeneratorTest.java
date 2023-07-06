@@ -12,7 +12,8 @@ class RandomNumberGeneratorTest {
     @Test
     void generate_random_number_between_one_and_nine() {
         // when
-        List<Integer> randomNums = RandomNumberGenerator.createRandomNumberBetweenOneAndNine();
+        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        List<Integer> randomNums = randomNumberGenerator.generateThreeNumbers();
         int expectedSize = 3;
 
         // then
