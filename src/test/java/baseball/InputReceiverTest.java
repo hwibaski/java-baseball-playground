@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,10 +19,10 @@ class InputReceiverTest {
         this.setSystemIn(input);
 
         // when
-        String playerInput = InputReceiver.getPlayerInputNum();
+        List<Integer> playerInput = InputReceiver.getPlayerInputNum();
 
         // then
-        assertThat(playerInput).isEqualTo(input);
+        assertThat(playerInput).containsExactly(1, 2, 3);
     }
 
     @DisplayName("사용자가 문자가 포함된 숫자 입력할 시 예외를 던진다.")
@@ -34,7 +35,7 @@ class InputReceiverTest {
         // when
         // then
         assertThatThrownBy(() -> {
-            String playerInput = InputReceiver.getPlayerInputNum();
+            List<Integer> playerInput = InputReceiver.getPlayerInputNum();
         })
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("숫자만 입력해주세요");
@@ -50,7 +51,7 @@ class InputReceiverTest {
         // when
         // then
         assertThatThrownBy(() -> {
-            String playerInput = InputReceiver.getPlayerInputNum();
+            List<Integer> playerInput = InputReceiver.getPlayerInputNum();
         })
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("세 자리 숫자만 입력해주세요");

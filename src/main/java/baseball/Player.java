@@ -2,6 +2,8 @@ package baseball;
 
 import static baseball.BallSet.TOTAL_BALL_COUNT;
 
+import java.util.List;
+
 public class Player {
     private final BallSet ballSet;
 
@@ -11,16 +13,18 @@ public class Player {
 
     private Ball[] generateThreeBall() {
         Ball[] tmpBalls = new Ball[TOTAL_BALL_COUNT];
-        String playerInputNum = InputReceiver.getPlayerInputNum();
-        String s = String.valueOf(playerInputNum);
-        assignBallSet(tmpBalls, s);
+        List<Integer> playerInputNum = InputReceiver.getPlayerInputNum();
+        this.assignBallSet(tmpBalls, playerInputNum);
         return tmpBalls;
     }
 
-    private void assignBallSet(Ball[] tmpBalls, String s) {
-        for (int i = 0; i < TOTAL_BALL_COUNT; i++) {
-            int order = i + 1;
-            tmpBalls[i] = new Ball(Character.getNumericValue(s.charAt(i)), order);
+    private void assignBallSet(Ball[] tmpBalls, List<Integer> numbers) {
+        int madeBallCount = 0;
+        int order = madeBallCount + 1;
+
+        for (Integer number : numbers) {
+            tmpBalls[madeBallCount] = new Ball(number, order);
+            madeBallCount++;
         }
     }
 

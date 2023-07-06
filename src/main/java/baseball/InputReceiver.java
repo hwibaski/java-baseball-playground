@@ -1,16 +1,24 @@
 package baseball;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputReceiver {
 
     private static final int MAX_PLAYER_INPUT_LENGTH = 3;
 
-    public static String getPlayerInputNum() {
+    public static List<Integer> getPlayerInputNum() {
         String playerInput = getPlayerInput();
         validatePlayerInputLength(playerInput);
         validatePlayerInputThatIsNumber(playerInput);
-        return playerInput;
+        
+        List<Integer> numbers = new ArrayList<>();
+        for (String number : playerInput.split("")) {
+            numbers.add(Integer.parseInt(number));
+        }
+
+        return numbers;
     }
 
     private static String getPlayerInput() {
