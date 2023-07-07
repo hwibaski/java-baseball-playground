@@ -1,10 +1,10 @@
 package baseball;
 
 public class Game {
-    private final Computer computer;
+    private final Player computer;
     private GameResult gameResult;
 
-    public Game(Computer computer) {
+    public Game(Player computer) {
         this.computer = computer;
     }
 
